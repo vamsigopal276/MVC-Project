@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Edit Product</h1>
+
+        <!-- Bind the form to the 'product' object -->
+        <form th:action="@{/update}" th:object="${product}" method="Post" class="needs-validation" novalidate>
+            <input type="hidden" th:field="*{proId}" />
+
+            <div class="form-group">
+                <label for="proName">Product Name:</label>
+                <!-- Use th:field to bind directly to the product object -->
+                <input type="text" id="proName" th:field="*{proName}" class="form-control" required />
+                <div class="invalid-feedback">Please enter a product name.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="proBrand">Brand:</label>
+                <input type="text" id="proBrand" th:field="*{proBrand}" class="form-control" required />
+                <div class="invalid-feedback">Please enter a brand name.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="proPrice">Price:</label>
+                <input type="number" id="proPrice" th:field="*{proPrice}" class="form-control" step="0.01" required />
+                <div class="invalid-feedback">Please enter a valid price.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="proDescription">Description:</label>
+                <textarea id="proDescription" th:field="*{proDescription}" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="proCategory">Category:</label>
+                <!-- Dropdown for Category -->
+                <select id="proCategory" th:field="*{proCategory}" class="form-control" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Washing Machine">Washing Machine</option>
+                    <option value="Laptop">Laptop</option>
+                </select>
+                <div class="invalid-feedback">Please select a category.</div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Optional: Client-side form validation -->
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</body>
+</html>
